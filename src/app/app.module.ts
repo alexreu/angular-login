@@ -7,6 +7,8 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import {AuthGuard} from './auth.guard';
+import {AuthService} from './auth.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {HttpClientModule} from '@angular/common/http';
       },
       {
         path: 'admin',
-        component: AdminComponent
+        component: AdminComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: '',
@@ -33,7 +36,7 @@ import {HttpClientModule} from '@angular/common/http';
       }
     ])
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
